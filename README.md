@@ -177,30 +177,94 @@ pytest -m api              # API tests only
 
 ## 🚀 Deployment
 
-### Development
+### 🐳 Docker Deployment (Recommended)
+
+#### Quick Start with Docker
+```bash
+# Development
+docker-compose up --build
+
+# Production
+docker-compose -f docker-compose.prod.yml up --build -d
+```
+
+#### Development with Docker
+```bash
+# Build and run in development mode
+docker-compose up --build
+
+# View logs
+docker-compose logs -f
+
+# Stop services
+docker-compose down
+```
+
+#### Production Deployment
+```bash
+# Copy environment template
+cp .env.example .env
+# Edit .env with your production values
+
+# Deploy with production configuration
+docker-compose -f docker-compose.prod.yml up --build -d
+
+# Scale the application
+docker-compose -f docker-compose.prod.yml up --scale radio-sahoo=3 -d
+
+# View production logs
+docker-compose -f docker-compose.prod.yml logs -f
+```
+
+#### Docker Environment Variables
+```env
+# Required configuration
+SECRET_KEY=your-super-secret-key-change-this-in-production
+DATABASE_PATH=/app/data/radio_sahoo.db
+STREAM_URL=https://d3d4yli4hf5bmh.cloudfront.net/hls/live.m3u8
+
+# Optional configuration
+FLASK_ENV=production
+FLASK_DEBUG=0
+LOG_LEVEL=INFO
+WORKERS=4
+PORT=5000
+ALLOWED_ORIGINS=*
+```
+
+### 🖥️ Traditional Deployment
+
+#### Development
 ```bash
 python backend/app.py
 ```
 
-### Production
+#### Production with Gunicorn
 ```bash
-# Using Gunicorn
+# Install Gunicorn
 pip install gunicorn
+
+# Run with multiple workers
 gunicorn --bind 0.0.0.0:8000 --workers 4 backend.app:create_app()
 ```
 
-### Environment Variables
-```env
-# Required configuration
-FLASK_SECRET_KEY=your_secret_key_here
-DATABASE_PATH=radio.db
-STREAM_URL=https://your-stream-url.com/live.m3u8
+### ☁️ Cloud Deployment
 
-# Optional configuration  
-FLASK_DEBUG=False
-FLASK_HOST=127.0.0.1
-FLASK_PORT=5000
-LOG_LEVEL=INFO
+#### Deploy to any Docker-supported platform:
+- **AWS ECS/Fargate**: Use docker-compose.prod.yml
+- **Google Cloud Run**: Single container deployment
+- **DigitalOcean App Platform**: Git-based deployment
+- **Heroku**: Container registry deployment
+- **Azure Container Instances**: Resource group deployment
+
+#### Example: DigitalOcean Deployment
+```bash
+# Build and push to registry
+docker build -t radio-sahoo .
+docker tag radio-sahoo registry.digitalocean.com/your-registry/radio-sahoo
+docker push registry.digitalocean.com/your-registry/radio-sahoo
+
+# Deploy via DigitalOcean control panel or doctl
 ```
 
 ## 🛠️ Development

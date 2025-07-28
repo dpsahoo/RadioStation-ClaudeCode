@@ -1,0 +1,74 @@
+{
+  "family": "radio-sahoo-task",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "executionRoleArn": "arn:aws:iam::896820529994:role/RadioSahooTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::896820529994:role/RadioSahooTaskRole",
+  "containerDefinitions": [
+    {
+      "name": "radio-sahoo",
+      "image": "896820529994.dkr.ecr.ap-southeast-2.amazonaws.com/radio-sahoo:amd64",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 5000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "FLASK_ENV",
+          "value": "production"
+        },
+        {
+          "name": "FLASK_DEBUG",
+          "value": "0"
+        },
+        {
+          "name": "SECRET_KEY",
+          "value": "your-production-secret-key-here"
+        },
+        {
+          "name": "DATABASE_PATH",
+          "value": "/app/data/radio_sahoo.db"
+        },
+        {
+          "name": "STREAM_URL",
+          "value": "https://d3d4yli4hf5bmh.cloudfront.net/hls/live.m3u8"
+        },
+        {
+          "name": "METADATA_URL",
+          "value": "https://d3d4yli4hf5bmh.cloudfront.net/metadatav2.json"
+        },
+        {
+          "name": "COVER_ART_URL",
+          "value": "https://d3d4yli4hf5bmh.cloudfront.net/cover.jpg"
+        },
+        {
+          "name": "LOG_LEVEL",
+          "value": "INFO"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/radio-sahoo",
+          "awslogs-region": "ap-southeast-2",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "healthCheck": {
+        "command": [
+          "CMD-SHELL",
+          "curl -f http://localhost:5000/health || exit 1"
+        ],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 60
+      }
+    }
+  ]
+}

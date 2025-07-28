@@ -80,3 +80,8 @@ tmp/
 # Cache
 .cache/
 *.cache
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+radio-sahoo-deployer_accessKeys.csv

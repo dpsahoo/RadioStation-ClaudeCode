@@ -5,29 +5,26 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: radio-sahoo-dev
+    container_name: radio-sahoo-prod
     ports:
-      - "5000:5000"
+      - "80:5000"
     environment:
-      - FLASK_ENV=development
-      - FLASK_DEBUG=1
-      - SECRET_KEY=dev-secret-key-change-in-production
+      - FLASK_ENV=production
+      - FLASK_DEBUG=0
+      - SECRET_KEY=${SECRET_KEY:-please-change-this-secret-key-in-production}
       - DATABASE_PATH=/app/data/radio_sahoo.db
-      - STREAM_URL=https://d3d4yli4hf5bmh.cloudfront.net/hls/live.m3u8
-      - METADATA_URL=https://d3d4yli4hf5bmh.cloudfront.net/metadatav2.json
-      - COVER_ART_URL=https://d3d4yli4hf5bmh.cloudfront.net/cover.jpg
-      - ALLOWED_ORIGINS=http://localhost:5000,http://127.0.0.1:5000
-      - LOG_LEVEL=DEBUG
+      - STREAM_URL=${STREAM_URL:-https://d3d4yli4hf5bmh.cloudfront.net/hls/live.m3u8}
+      - METADATA_URL=${METADATA_URL:-https://d3d4yli4hf5bmh.cloudfront.net/metadatav2.json}
+      - COVER_ART_URL=${COVER_ART_URL:-https://d3d4yli4hf5bmh.cloudfront.net/cover.jpg}
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-*}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - WORKERS=${WORKERS:-4}
     volumes:
-      # Mount source code for development (hot reload)
-      - ./backend:/app/backend
-      - ./frontend:/app/frontend
-      - ./tests:/app/tests
-      # Persist database and logs
-      - radio-sahoo-data:/app/data
-      - radio-sahoo-logs:/app/logs
+      # Persist database and logs only (no source code mounting)
+      - radio-sahoo-prod-data:/app/data
+      - radio-sahoo-prod-logs:/app/logs
     networks:
-      - radio-sahoo-network
+      - radio-sahoo-prod-network
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
@@ -35,13 +32,51 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
+    # Production security settings
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /var/tmp
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+  
+  # Optional: Reverse proxy for production
+  nginx:
+    image: nginx:alpine
+    container_name: radio-sahoo-nginx
+    ports:
+      - "443:443"
+      - "8080:80"
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - radio-sahoo
+    networks:
+      - radio-sahoo-prod-network
+    restart: unless-stopped
+    # Uncomment for production with SSL
+    # environment:
+    #   - DOMAIN=${DOMAIN:-localhost}
 
 networks:
-  radio-sahoo-network:
+  radio-sahoo-prod-network:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
 
 volumes:
-  radio-sahoo-data:
+  radio-sahoo-prod-data:
     driver: local
-  radio-sahoo-logs:
+  radio-sahoo-prod-logs:
     driver: local
