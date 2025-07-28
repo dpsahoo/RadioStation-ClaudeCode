@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Calico - Lossless Audio Streaming</title>
+    
+    <!-- External dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/components/player.css">
+    <link rel="stylesheet" href="../css/components/volume.css">
+    <link rel="stylesheet" href="../css/components/track-info.css">
+    <link rel="stylesheet" href="../css/components/ratings.css">
+    <link rel="stylesheet" href="../css/components/recent-tracks.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <img src="../static/RadioCalicoLogoTM.png" alt="Radio Calico Logo" class="logo">
+            <h1 class="brand-title">Radio Calico</h1>
+        </div>
+    </header>
+    
+    <div class="radio-container">
+        <!-- Hidden audio player -->
+        <audio id="radio-player" preload="none" style="display: none;"></audio>
+        
+        <!-- Status indicator -->
+        <div id="status" class="status paused">Ready to play</div>
+        
+        <!-- Now Playing Section -->
+        <div class="now-playing">
+            <h3>🎵 Now Playing</h3>
+            <div id="current-track" class="current-track">
+                <div class="album-art-container">
+                    <div class="year-badge" id="year-badge">1983</div>
+                    <img id="album-art" class="album-art" 
+                         src="https://d3d4yli4hf5bmh.cloudfront.net/cover.jpg" 
+                         alt="Album Art" 
+                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjRDhGMkQ1Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjEwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IiMxRjRFMjMiIHRleHQtYW5jaG9yPSJtaWRkbGUiPk5vIEFydDwvdGV4dD4KPC9zdmc+Cg=='">
+                </div>
+                <div class="track-info">
+                    <div class="artist-name" id="track-artist">Loading Artist...</div>
+                    <div class="track-title" id="track-title">Loading Track...</div>
+                    <div class="track-album" id="track-album">Loading Album...</div>
+                    
+                    <div class="audio-quality" id="audio-quality-display">Source quality: 16-bit 44.1kHz</div>
+                    <div class="stream-quality">Stream quality: 48kHz FLAC / HLS Lossless</div>
+                    
+                    <!-- Player Controls -->
+                    <div class="player-controls-inline">
+                        <div class="controls-label">Playback Controls</div>
+                        <div class="controls">
+                            <button class="control-btn" onclick="reloadStream()" title="Reload Stream">🔄</button>
+                            <button id="playPauseBtn" class="play-pause-btn" onclick="togglePlayPause()" title="Play/Pause">▶️</button>
+                            <button class="control-btn" onclick="stopStream()" title="Stop">⏹️</button>
+                        </div>
+                        
+                        <div class="volume-label">Volume</div>
+                        <div class="volume-control">
+                            <span>🔊</span>
+                            <input type="range" id="volume-slider" class="volume-slider" min="0" max="1" step="0.1" value="0.8">
+                            <span id="volume-display">80%</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Track Actions -->
+                    <div class="track-actions">
+                        <div class="rating-section">
+                            <span class="rating-label">Rate this track:</span>
+                            <div class="rating-buttons">
+                                <button class="rating-btn thumbs-up" id="thumbs-up" title="Like this track">👍</button>
+                                <button class="rating-btn thumbs-down" id="thumbs-down" title="Dislike this track">👎</button>
+                            </div>
+                            <div class="rating-counts">
+                                <div class="count-item thumbs-up">
+                                    <span>👍</span>
+                                    <span class="count-number" id="up-count">0</span>
+                                </div>
+                                <div class="count-item thumbs-down">
+                                    <span>👎</span>
+                                    <span class="count-number" id="down-count">0</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="rating-status" id="rating-status">Rate this track</span>
+                    </div>
+                    
+                    <div class="track-badges" id="track-badges"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recently Played Section -->
+        <div class="recently-played">
+            <h3>📻 Recently Played</h3>
+            <div id="recent-tracks" class="recent-tracks"></div>
+        </div>
+        
+        <!-- Stream Information -->
+        <div class="stream-info">
+            <h3>Stream Information</h3>
+            <p><strong>URL:</strong> https://d3d4yli4hf5bmh.cloudfront.net/hls/live.m3u8</p>
+            <p><strong>Format:</strong> HLS (HTTP Live Streaming)</p>
+            <p><strong>Quality:</strong> <span id="audio-quality">Lossless</span></p>
+            <p><strong>Protocol:</strong> HTTPS</p>
+        </div>
+    </div>
+
+    <!-- JavaScript modules -->
+    <script src="../js/modules/state.js"></script>
+    <script src="../js/modules/player.js"></script>
+    <script src="../js/modules/metadata.js"></script>
+    <script src="../js/modules/rating.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "name": "radio-calico-frontend-tests",
+  "version": "1.0.0",
+  "description": "Frontend tests for Radio Calico application",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.23.0",
+    "babel-jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": ["<rootDir>/test-setup.js"],
+    "collectCoverageFrom": [
+      "../../frontend/js/**/*.js",
+      "!../../frontend/js/main.js"
+    ],
+    "testMatch": [
+      "**/test_*.js"
+    ]
+  },
+  "babel": {
+    "presets": ["@babel/preset-env"]
+  }
+}

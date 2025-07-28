@@ -1,0 +1,106 @@
+/* Rating system styles */
+.track-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.rating-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.rating-label {
+    font-family: var(--font-secondary);
+    color: var(--charcoal);
+    font-weight: 500;
+}
+
+.rating-buttons {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.rating-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    border: 2px solid var(--forest-green);
+    background: transparent;
+    color: var(--charcoal);
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.rating-btn:hover {
+    background: var(--mint);
+    transform: translateY(-2px);
+}
+
+.rating-btn.active {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.rating-btn.thumbs-up.active {
+    background: var(--teal);
+    color: var(--white);
+    border-color: var(--teal);
+}
+
+.rating-btn.thumbs-down.active {
+    background: var(--calico-orange);
+    color: var(--white);
+    border-color: var(--calico-orange);
+}
+
+.rating-btn:active {
+    transform: translateY(0);
+}
+
+.rating-status {
+    font-size: 0.9rem;
+    color: var(--charcoal);
+    font-style: italic;
+    margin-left: var(--spacing-md);
+}
+
+.rating-counts {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: auto;
+}
+
+.count-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px var(--spacing-sm);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+.count-item.thumbs-up {
+    color: var(--teal);
+    border: 1px solid rgba(56, 162, 157, 0.3);
+}
+
+.count-item.thumbs-down {
+    color: var(--calico-orange);
+    border: 1px solid rgba(239, 166, 60, 0.3);
+}
+
+.count-number {
+    min-width: 20px;
+    text-align: center;
+}

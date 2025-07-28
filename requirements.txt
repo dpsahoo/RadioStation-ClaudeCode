@@ -1,0 +1,33 @@
+# Core web framework
+Flask==2.3.3
+Flask-CORS==4.0.0
+
+# Database
+# sqlite3 is included with Python
+
+# Environment variable loading
+python-dotenv==1.0.0
+
+# HTTP requests
+requests==2.31.0
+
+# Logging and monitoring
+structlog==23.1.0
+
+# Security
+werkzeug==2.3.7
+
+# Development and testing dependencies
+pytest==7.4.2
+pytest-flask==1.2.0
+pytest-cov==4.1.0
+pytest-mock==3.11.1
+
+# Code quality
+black==23.7.0
+flake8==6.0.0
+isort==5.12.0
+
+# Testing utilities
+factory-boy==3.3.0
+freezegun==1.2.2
