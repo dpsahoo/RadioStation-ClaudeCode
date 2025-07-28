@@ -12,11 +12,19 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Import application modules
-from .config import config
-from .models import init_db
-from .api import users_bp, posts_bp, ratings_bp, stream_bp
-from .utils.logging_config import setup_logging
-from .utils.responses import error_response
+try:
+    from .config import config
+    from .models import init_db
+    from .api import users_bp, posts_bp, ratings_bp, stream_bp
+    from .utils.logging_config import setup_logging
+    from .utils.responses import error_response
+except ImportError:
+    # Handle direct execution
+    from config import config
+    from models import init_db
+    from api import users_bp, posts_bp, ratings_bp, stream_bp
+    from utils.logging_config import setup_logging
+    from utils.responses import error_response
 
 # Setup logging
 setup_logging()

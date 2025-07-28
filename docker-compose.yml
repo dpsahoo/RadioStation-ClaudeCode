@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  radio-sahoo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: radio-sahoo-dev
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+      - SECRET_KEY=dev-secret-key-change-in-production
+      - DATABASE_PATH=/app/data/radio_sahoo.db
+      - STREAM_URL=https://d3d4yli4hf5bmh.cloudfront.net/hls/live.m3u8
+      - METADATA_URL=https://d3d4yli4hf5bmh.cloudfront.net/metadatav2.json
+      - COVER_ART_URL=https://d3d4yli4hf5bmh.cloudfront.net/cover.jpg
+      - ALLOWED_ORIGINS=http://localhost:5000,http://127.0.0.1:5000
+      - LOG_LEVEL=DEBUG
+    volumes:
+      # Mount source code for development (hot reload)
+      - ./backend:/app/backend
+      - ./frontend:/app/frontend
+      - ./tests:/app/tests
+      # Persist database and logs
+      - radio-sahoo-data:/app/data
+      - radio-sahoo-logs:/app/logs
+    networks:
+      - radio-sahoo-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  radio-sahoo-network:
+    driver: bridge
+
+volumes:
+  radio-sahoo-data:
+    driver: local
+  radio-sahoo-logs:
+    driver: local
