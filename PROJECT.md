@@ -1,4 +1,4 @@
-# Radio Calico - Lossless Audio Streaming Platform
+# Radio Sahoo - Lossless Audio Streaming Platform
 
 A modern web-based radio streaming application featuring lossless audio playback, real-time metadata, and an interactive rating system.
 
@@ -9,7 +9,7 @@ A modern web-based radio streaming application featuring lossless audio playback
 - **Real-time Metadata**: Live track information, album art, and artist details
 - **Interactive Rating System**: Thumbs up/down rating with unique user tracking
 - **Recently Played**: Display of last 5 tracks with artist information
-- **Responsive Design**: Mobile-friendly interface with RadioCalico branding
+- **Responsive Design**: Mobile-friendly interface with RadioSahoo branding
 
 ### Technical Features
 - **Modern Architecture**: Modular Flask backend with clean separation of concerns
@@ -94,7 +94,7 @@ RadioStation-ClaudeCode/
 └── 📄 PROJECT.md              # This file
 ```
 
-## 🎨 RadioCalico Brand Guidelines
+## 🎨 RadioSahoo Brand Guidelines
 
 ### Color Palette
 - **Mint**: `#D8F2D5` - Light backgrounds and accents

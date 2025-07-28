@@ -1,4 +1,4 @@
-"""Test utility functions and helpers for Radio Calico tests."""
+"""Test utility functions and helpers for Radio Sahoo tests."""
 
 import json
 import sqlite3

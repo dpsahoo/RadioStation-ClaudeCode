@@ -1,7 +1,7 @@
-# Radio Calico - Claude Memory File
+# Radio Sahoo - Claude Memory File
 
 ## Project Overview
-Radio Calico is a web-based lossless audio streaming application that plays HLS radio streams and provides track rating functionality. The project has been completely refactored for production readiness.
+Radio Sahoo is a web-based lossless audio streaming application that plays HLS radio streams and provides track rating functionality. The project has been completely refactored for production readiness.
 
 ## Key Technologies
 - **Backend**: Flask (Python)
@@ -115,8 +115,8 @@ The application uses environment variables for configuration:
 4. ✅ **XSS Prevention**: HTML escaping in frontend
 5. ✅ **Error Handling**: Proper error responses without data leaks
 
-## RadioCalico Branding
-- **Colors**: Mint (#D8F2D5), Forest Green (#1F4E23), Teal (#38A29D), Calico Orange (#EFA63C)
+## RadioSahoo Branding
+- **Colors**: Mint (#D8F2D5), Forest Green (#1F4E23), Teal (#38A29D), Sahoo Orange (#EFA63C)
 - **Typography**: Montserrat (headers), Open Sans (body text)
 - **Logo**: Cat with headphones design
 - **Layout**: Two-column grid with prominent 500x500px album art

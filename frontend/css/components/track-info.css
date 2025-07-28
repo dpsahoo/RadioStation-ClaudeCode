@@ -58,7 +58,7 @@
     position: absolute;
     top: var(--spacing-lg);
     right: var(--spacing-lg);
-    background: linear-gradient(135deg, var(--calico-orange) 0%, #ff8c42 100%);
+    background: linear-gradient(135deg, var(--sahoo-orange) 0%, #ff8c42 100%);
     color: var(--white);
     padding: 12px 20px;
     border-radius: 0 0 0 var(--spacing-lg);

@@ -1,5 +1,5 @@
 /**
- * Audio player management for Radio Calico
+ * Audio player management for Radio Sahoo
  */
 class AudioPlayer {
     constructor(state) {

@@ -1,5 +1,5 @@
 /**
- * Metadata management for Radio Calico
+ * Metadata management for Radio Sahoo
  */
 class MetadataManager {
     constructor(state) {

@@ -55,9 +55,9 @@
 }
 
 .rating-btn.thumbs-down.active {
-    background: var(--calico-orange);
+    background: var(--sahoo-orange);
     color: var(--white);
-    border-color: var(--calico-orange);
+    border-color: var(--sahoo-orange);
 }
 
 .rating-btn:active {
@@ -96,7 +96,7 @@
 }
 
 .count-item.thumbs-down {
-    color: var(--calico-orange);
+    color: var(--sahoo-orange);
     border: 1px solid rgba(239, 166, 60, 0.3);
 }
 

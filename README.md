@@ -1,7 +1,7 @@
-# 🎵 Radio Calico - Lossless Audio Streaming Platform
+# 🎵 Radio Sahoo - Lossless Audio Streaming Platform
 
 <div align="center">
-  <img src="frontend/static/RadioCalicoLogoTM.png" alt="Radio Calico Logo" width="150" height="150">
+  <img src="frontend/static/RadioSahooLogoTM.png" alt="Radio Sahoo Logo" width="150" height="150">
   
   **A modern web-based radio streaming application featuring lossless audio playback, real-time metadata, and interactive user engagement.**
 
@@ -22,7 +22,7 @@
 
 ### 📱 **User Interface**
 - **Responsive Design**: Optimized for desktop, tablet, and mobile
-- **RadioCalico Branding**: Professional design with custom color palette
+- **RadioSahoo Branding**: Professional design with custom color palette
 - **Real-time Updates**: Live track information and album art
 - **Accessibility**: Keyboard shortcuts and semantic HTML
 
@@ -104,7 +104,7 @@ RadioStation-ClaudeCode/
 └── 📄 PROJECT.md              # Detailed project documentation
 ```
 
-## 🎨 RadioCalico Brand
+## 🎨 RadioSahoo Brand
 
 ### Color Palette
 - **Mint**: `#D8F2D5` - Light backgrounds and accents
@@ -300,7 +300,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **HLS.js Team**: For excellent HTTP Live Streaming support
 - **Flask Community**: For the robust web framework
-- **RadioCalico Design**: For the beautiful brand identity
+- **RadioSahoo Design**: For the beautiful brand identity
 - **Open Source Contributors**: For inspiration and best practices
 
 ## 📞 Support

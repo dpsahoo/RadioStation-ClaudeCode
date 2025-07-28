@@ -1,5 +1,5 @@
 /**
- * Rating system management for Radio Calico
+ * Rating system management for Radio Sahoo
  */
 class RatingManager {
     constructor(state) {

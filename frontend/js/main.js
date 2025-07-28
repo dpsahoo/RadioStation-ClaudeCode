@@ -1,5 +1,5 @@
 /**
- * Main application entry point for Radio Calico
+ * Main application entry point for Radio Sahoo
  */
 (function() {
     'use strict';
@@ -10,7 +10,7 @@
     /**
      * Main application class
      */
-    class RadioCalicoApp {
+    class RadioSahooApp {
         constructor() {
             this.state = window.appState;
             this.player = null;
@@ -24,7 +24,7 @@
          */
         async init() {
             try {
-                console.log('Initializing Radio Calico...');
+                console.log('Initializing Radio Sahoo...');
                 
                 // Initialize modules
                 this.player = new window.AudioPlayer(this.state);
@@ -47,10 +47,10 @@
                 this.metadata.loadMetadata();
                 
                 this.initialized = true;
-                console.log('Radio Calico initialized successfully');
+                console.log('Radio Sahoo initialized successfully');
                 
             } catch (error) {
-                console.error('Failed to initialize Radio Calico:', error);
+                console.error('Failed to initialize Radio Sahoo:', error);
                 this.showInitializationError(error);
             }
         }
@@ -157,7 +157,7 @@
      */
     document.addEventListener('DOMContentLoaded', async function() {
         try {
-            app = new RadioCalicoApp();
+            app = new RadioSahooApp();
             await app.init();
         } catch (error) {
             console.error('Failed to start application:', error);
@@ -165,6 +165,6 @@
     });
     
     // Make app available globally for debugging
-    window.radioCalicoApp = app;
+    window.radioSahooApp = app;
     
 })();

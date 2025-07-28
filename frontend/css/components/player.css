@@ -80,7 +80,7 @@
 }
 
 .play-pause-btn:hover {
-    background: linear-gradient(135deg, var(--teal) 0%, var(--calico-orange) 100%);
+    background: linear-gradient(135deg, var(--teal) 0%, var(--sahoo-orange) 100%);
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 12px 35px rgba(56, 162, 157, 0.5), 
                 0 6px 18px rgba(0, 0, 0, 0.2),

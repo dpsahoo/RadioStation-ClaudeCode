@@ -1,4 +1,4 @@
-"""Test configuration and fixtures for Radio Calico tests."""
+"""Test configuration and fixtures for Radio Sahoo tests."""
 
 import os
 import pytest

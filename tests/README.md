@@ -1,6 +1,6 @@
-# Radio Calico Test Suite
+# Radio Sahoo Test Suite
 
-Comprehensive testing framework for the Radio Calico application, covering backend API endpoints, database models, utility functions, and frontend JavaScript modules.
+Comprehensive testing framework for the Radio Sahoo application, covering backend API endpoints, database models, utility functions, and frontend JavaScript modules.
 
 ## 🧪 Test Structure
 

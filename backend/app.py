@@ -1,5 +1,5 @@
 """
-Radio Calico - Main Flask Application
+Radio Sahoo - Main Flask Application
 Refactored for better organization, security, and maintainability.
 """
 
@@ -61,7 +61,7 @@ def register_routes(app: Flask) -> None:
     def home():
         """Home page with server status and available routes."""
         return '''
-        <h1>Radio Calico - Lossless Audio Streaming</h1>
+        <h1>Radio Sahoo - Lossless Audio Streaming</h1>
         <p>Server is running successfully!</p>
         <p>Database: SQLite connected</p>
         <h2>Available Routes:</h2>
@@ -133,7 +133,7 @@ def main():
         # Create Flask app
         app = create_app()
         
-        logger.info(f"Starting Radio Calico server...")
+        logger.info(f"Starting Radio Sahoo server...")
         logger.info(f"Debug mode: {config.DEBUG}")
         logger.info(f"Host: {config.HOST}:{config.PORT}")
         
